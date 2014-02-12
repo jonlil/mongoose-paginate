@@ -31,10 +31,31 @@ ExampleSchema.plugin(paginator, {
 
 var example = mongoose.model('Example', ExampleSchema);
 
+// example on query object
+req.query = {
+    after: "52fb4cd4205626aceddc7127"
+};
+
 example.paginate(req, '_id')
     .limit(20) // overrides default limit
     .exec(function(err, objs) {
         return res.send(200, objs);
+    });
+
+// or get more information
+example.paginate(req, '_id')
+    .limit(20) // overrides default limit
+    .execPagination(function(err, obj) {
+        /** obj = {
+            "perPage": 50,
+            "thisPage": 2,
+            "after": "52fb4cd4205626aceddc7127",
+            "before": "52fb4cca546de0dd61469e20",
+            "count": 22,
+            "results": [{}, {}]
+        } */
+        return res.send(200, obj);
+
     });
 
 ```

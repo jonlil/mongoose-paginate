@@ -2,11 +2,31 @@
  * Created by jonas on 2/12/14.
  */
 
-module.exports = function paginatePlugin(schema, options) {
+var mongoose = require('mongoose');
+
+
+var paginatePlugin = function (schema, options) {
     options = options || {};
     options.limit = options.limit || 25;
     options.direction = options.direction || 1;
     options.defaultKey = options.defaultKey || '_id';
+
+    mongoose.Query.prototype.execPagination = function(callback) {
+        var query = this;
+        var _return = {};
+
+        if (!query.options.paginateKey) throw new Error('Did you forgett to use pagination plugin?');
+        if (!query.options.limit) query.options.limit = options.limit;
+
+        query.exec(function(err, objects) {
+            _return.results = objects;
+            _return.perPage = query.options.limit;
+            _return.thisPage = objects.length;
+            _return.after = objects && objects.length > 0 ? objects[objects.length - 1][query.options.paginateKey] : null;
+            _return.before = objects && objects.length > 0 ? objects[0][query.options.paginateKey] : null;
+            return callback(err, _return);
+        });
+    };
 
     var normalizeSorting = function(sort) {
         if(!sort) return false;
@@ -45,7 +65,8 @@ module.exports = function paginatePlugin(schema, options) {
 
         q.where(query);
         q.sort(sorting);
-        q.limit(options.limit)
+        q.limit(options.limit);
+        q.options.paginationKey = key;
 
         if ('function' === typeof cb) return q.exec(cb);
         return q;
@@ -53,3 +74,5 @@ module.exports = function paginatePlugin(schema, options) {
 
     schema.statics['paginate'] = paginate;
 };
+
+module.exports = paginatePlugin;

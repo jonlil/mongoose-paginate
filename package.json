@@ -1,6 +1,6 @@
 {
     "name": "mongoose-paginator",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "author": "Jonas Liljestran <jonas.liljestrand@gmail.com>",
     "dependencies": {},
     "devDependencies": {},
@@ -8,6 +8,12 @@
     "bugs": {
         "url":"https://github.com/jonlil/mongoose-paginate/issues/new"
     },
+    "keywords": [
+        "mongodb",
+        "mongoose",
+        "plugin",
+        "paginate"
+    ],
     "repository": {
         "type": "git",
         "url": "git://github.com/jonlil/mongoose-paginate.git"
