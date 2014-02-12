@@ -54,7 +54,6 @@ var paginatePlugin = function (schema, options) {
         if (key === 'id') sortKey = '_id';
 
         if (rQuery.after || rQuery.before) {
-            sorting[sortKey] = normalizeSorting(rQuery.sort) || options.direction;
             query[key] = {};
             if(rQuery.after) {
                 query[key] = sorting[sortKey] > 0 ? { $gt: rQuery.after } : { $lt: rQuery.after };
@@ -62,11 +61,12 @@ var paginatePlugin = function (schema, options) {
                 query[key] = sorting[sortKey] > 0 ? { $lt: rQuery.before } : { $gt: rQuery.before };
             }
         }
+        sorting[sortKey] = normalizeSorting(rQuery.sort) || options.direction;
 
         q.where(query);
         q.sort(sorting);
         q.limit(options.limit);
-        q.options.paginationKey = key;
+        q.options.paginateKey = key;
 
         if ('function' === typeof cb) return q.exec(cb);
         return q;
