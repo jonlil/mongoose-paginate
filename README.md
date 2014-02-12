@@ -2,9 +2,10 @@
 
     Build to avoid usage of cursor.skip in mongodb
 
-    #### Features
-        * sorting
-        * chained querying
+#### Features
+    * Sorting (asc, desc)
+    * chained querying - returns query if no callback is given
+    * configurable
 
 #### Installation
 
@@ -22,7 +23,7 @@ var ExampleSchema = new mongoose.Schema({
     name: String
 }, { versionKey: false });
 
-ExampleSchema.plugin(paginator, { limit: 50 });
+ExampleSchema.plugin(paginator, /** optional */{ limit: 50, defaultKey: '_id', direction: 1 });
 
 var example = mongoose.model('Example', ExampleSchema);
 

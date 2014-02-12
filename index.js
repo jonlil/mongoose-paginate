@@ -3,6 +3,10 @@
  */
 
 module.exports = function paginatePlugin(schema, options) {
+    options = options || {};
+    options.limit = options.limit || 25;
+    options.direction = options.direction || 1;
+    options.defaultKey = options.defaultKey || '_id';
 
     var normalizeSorting = function(sort) {
         if(!sort) return false;
@@ -25,11 +29,12 @@ module.exports = function paginatePlugin(schema, options) {
             query = {},
             sortKey = key;
 
+        if (!key) key = options.defaultKey;
         if (rQuery.after && rQuery.before) throw new Error('Pagination can\'t have both after and before parameter');
         if (key === 'id') sortKey = '_id';
 
         if (rQuery.after || rQuery.before) {
-            sorting[sortKey] = normalizeSorting(rQuery.sort) || 1;
+            sorting[sortKey] = normalizeSorting(rQuery.sort) || options.direction;
             query[key] = {};
             if(rQuery.after) {
                 query[key] = sorting[sortKey] > 0 ? { $gt: rQuery.after } : { $lt: rQuery.after };
@@ -40,6 +45,7 @@ module.exports = function paginatePlugin(schema, options) {
 
         q.where(query);
         q.sort(sorting);
+        q.limit(options.limit)
 
         if ('function' === typeof cb) return q.exec(cb);
         return q;
