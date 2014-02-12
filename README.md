@@ -23,7 +23,11 @@ var ExampleSchema = new mongoose.Schema({
     name: String
 }, { versionKey: false });
 
-ExampleSchema.plugin(paginator, /** optional */{ limit: 50, defaultKey: '_id', direction: 1 });
+ExampleSchema.plugin(paginator, {
+    limit: 50,
+    defaultKey: '_id',
+    direction: 1
+});
 
 var example = mongoose.model('Example', ExampleSchema);
 
