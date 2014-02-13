@@ -15,7 +15,7 @@ var paginatePlugin = function (schema, options) {
         var query = this;
         var _return = {};
 
-        if (!query.options.paginateKey) throw new Error('Did you forgett to use pagination plugin?');
+        if (!query.options.paginateKey) throw new Error('Did you forget to use pagination plugin?');
         if (!query.options.limit) query.options.limit = options.limit;
 
         query.exec(function(err, objects) {
@@ -47,9 +47,12 @@ var paginatePlugin = function (schema, options) {
             rQuery = req.query,
             sorting = {},
             query = {},
-            sortKey = key;
+            sortKey;
 
-        if (!key) key = options.defaultKey;
+        if (!key) {
+            key = options.defaultKey;
+            sortKey = key;
+        }
         if (rQuery.after && rQuery.before) throw new Error('Pagination can\'t have both after and before parameter');
         if (key === 'id') sortKey = '_id';
 
