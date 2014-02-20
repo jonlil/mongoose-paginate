@@ -19,6 +19,7 @@ var paginatePlugin = function (schema, options) {
         if (!query.options.limit) query.options.limit = options.limit;
 
         query.exec(function(err, objects) {
+            if(!objects) objects = [];
             _return.results = objects;
             _return.perPage = query.options.limit;
             _return.thisPage = objects.length;
@@ -56,6 +57,7 @@ var paginatePlugin = function (schema, options) {
         if (rQuery.after && rQuery.before) throw new Error('Pagination can\'t have both after and before parameter');
         if (key === 'id') sortKey = '_id';
 
+        sorting[sortKey] = normalizeSorting(rQuery.sort) || options.direction;
         if (rQuery.after || rQuery.before) {
             query[key] = {};
             if(rQuery.after) {
@@ -64,7 +66,6 @@ var paginatePlugin = function (schema, options) {
                 query[key] = sorting[sortKey] > 0 ? { $lt: rQuery.before } : { $gt: rQuery.before };
             }
         }
-        sorting[sortKey] = normalizeSorting(rQuery.sort) || options.direction;
 
         q.where(query);
         q.sort(sorting);
