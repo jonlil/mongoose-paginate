@@ -1,12 +1,19 @@
 {
     "name": "mongoose-paginator",
-    "version": "0.1.1",
-    "author": "Jonas Liljestran <jonas.liljestrand@gmail.com>",
+    "version": "0.1.2",
+    "author": "Jonas Liljestrand <jonas.liljestrand@gmail.com>",
     "dependencies": {},
-    "devDependencies": {},
+    "devDependencies": {
+        "mocha": "latest",
+        "chai": "latest",
+        "mongoose": "latest"
+    },
     "description": "Mongoose plugin for ranged pagination",
     "bugs": {
         "url":"https://github.com/jonlil/mongoose-paginate/issues/new"
+    },
+    "scripts": {
+        "test": "mocha -u bdd -R spec -c ./test/*test.js"
     },
     "keywords": [
         "mongodb",
