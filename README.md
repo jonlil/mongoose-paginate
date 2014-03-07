@@ -41,7 +41,7 @@ params = {
     before: "52fb4cd4205626aceddc7127"
 };
 
-example.paginate(req, '_id')
+example.paginate(params, '_id')
     .limit(20) // overrides default limit
     .exec(function(err, objs) {
         return res.send(200, objs);
@@ -52,7 +52,7 @@ example.paginate(req, '_id')
     .limit(20) // overrides default limit
     .execPagination(function(err, obj) {
         /** obj = {
-            "perPage": 20,
+            "perPage": 20, <= same as limit
             "thisPage": 2,
             "after": "52fb4cd4205626aceddc7127",
             "before": "52fb4cca546de0dd61469e20",
