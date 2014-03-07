@@ -32,8 +32,13 @@ ExampleSchema.plugin(paginator, {
 var example = mongoose.model('Example', ExampleSchema);
 
 // example on query object
-req.query = {
+params = {
     after: "52fb4cd4205626aceddc7127"
+};
+
+// or
+params = {
+    before: "52fb4cd4205626aceddc7127"
 };
 
 example.paginate(req, '_id')
@@ -47,11 +52,10 @@ example.paginate(req, '_id')
     .limit(20) // overrides default limit
     .execPagination(function(err, obj) {
         /** obj = {
-            "perPage": 50,
+            "perPage": 20,
             "thisPage": 2,
             "after": "52fb4cd4205626aceddc7127",
             "before": "52fb4cca546de0dd61469e20",
-            "count": 22,
             "results": [{}, {}]
         } */
         return res.send(200, obj);
