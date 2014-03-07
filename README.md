@@ -48,7 +48,7 @@ example.paginate(params, '_id')
     });
 
 // or get more information
-example.paginate(req, '_id')
+example.paginate(params, '_id')
     .limit(20) // overrides default limit
     .execPagination(function(err, obj) {
         /** obj = {
