@@ -1,6 +1,6 @@
 {
     "name": "mongoose-paginator",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "author": "Jonas Liljestrand <jonas.liljestrand@gmail.com>",
     "dependencies": {},
     "devDependencies": {
