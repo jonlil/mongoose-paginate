@@ -6,7 +6,8 @@
     "devDependencies": {
         "mocha": "latest",
         "chai": "latest",
-        "mongoose": "latest"
+        "mongoose": "latest",
+        "async": "latest"
     },
     "description": "Mongoose plugin for ranged pagination",
     "bugs": {
