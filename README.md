@@ -1,6 +1,8 @@
 ### mongoose-paginator
 
     Build to avoid usage of cursor.skip in mongodb
+    
+[![NPM](https://nodei.co/npm/mongoose-paginator.png?downloads=true&stars=true)](https://nodei.co/npm/mongoose-paginator/)
 
 #### Features
     * Sorting (asc, desc)
