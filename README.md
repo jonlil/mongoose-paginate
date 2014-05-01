@@ -1,7 +1,6 @@
 ### mongoose-paginator
 
     Build to avoid usage of cursor.skip in mongodb
-    [MongoDB](http://docs.mongodb.org/manual/reference/method/cursor.skip/) reference why this is a good plugin
     
     The cursor.skip() method is often expensive because it requires the server to walk from the beginning of the collection
     or index to get the offset or skip position before beginning to return result. As offset (e.g. pageNumber above)
