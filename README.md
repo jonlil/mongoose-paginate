@@ -1,6 +1,17 @@
 ### mongoose-paginator
 
     Build to avoid usage of cursor.skip in mongodb
+    [MongoDB](http://docs.mongodb.org/manual/reference/method/cursor.skip/) reference why this is a good plugin
+    
+    The cursor.skip() method is often expensive because it requires the server to walk from the beginning of the collection
+    or index to get the offset or skip position before beginning to return result. As offset (e.g. pageNumber above)
+    increases, cursor.skip() will become slower and more CPU intensive. With larger collections, cursor.skip() 
+    may become IO bound.
+
+    Consider using range-based pagination for these kinds of tasks. That is, query for a range of objects, using logic
+    within the application to determine the pagination rather than the database itself. This approach features better index
+    utilization, if you do not need to easily jump to a specific page.
+
     
 [![NPM](https://nodei.co/npm/mongoose-paginator.png?downloads=true&stars=true)](https://nodei.co/npm/mongoose-paginator/)
 
