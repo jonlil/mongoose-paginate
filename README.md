@@ -2,13 +2,14 @@
 
     Build to avoid usage of cursor.skip in mongodb
     
-    The cursor.skip() method is often expensive because it requires the server to walk from the beginning of the collection
-    or index to get the offset or skip position before beginning to return result. As offset (e.g. pageNumber above)
-    increases, cursor.skip() will become slower and more CPU intensive. With larger collections, cursor.skip() 
-    may become IO bound.
+    The cursor.skip() method is often expensive because it requires the server to walk from the
+    beginning of the collection or index to get the offset or skip position before beginning to
+    return result. As offset (e.g. pageNumber above) increases, cursor.skip() will become slower
+    and more CPU intensive. With larger collections, cursor.skip() may become IO bound.
 
-    Consider using range-based pagination for these kinds of tasks. That is, query for a range of objects, using logic
-    within the application to determine the pagination rather than the database itself. This approach features better index
+    Consider using range-based pagination for these kinds of tasks.
+    That is, query for a range of objects, using logic within the application to determine the
+    pagination rather than the database itself. This approach features better index
     utilization, if you do not need to easily jump to a specific page.
 
     
